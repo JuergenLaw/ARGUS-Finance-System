@@ -51,5 +51,5 @@ The underlying scripts rely on explicit tab names to process formatting changes 
 ## Templates
 
 If you want to look at the layout or test the scripts, feel free to check out these viewing samples and copy them:
-* [Monthly Ledger Template ↗](PASTE_YOUR_SANITIZED_MONTHLY_LINK_HERE)
-* [Annual Master Dashboard ↗](PASTE_YOUR_SANITIZED_ANNUAL_LINK_HERE)
+* https://drive.google.com/drive/folders/1rrypquIKyJnfLiTLfyiRsz2lSqqh1W04?usp=drive_link
+Heads up: Full cross-workbook synchronization requires the complete 12-month network setup and authenticated triggers. If you want to see the ecosystem truly in action via a live demo, feel free to reach out!
