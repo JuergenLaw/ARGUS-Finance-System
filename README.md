@@ -7,6 +7,8 @@ An interconnected accounting network that links 12 individual monthly sheets to 
 ## Features
 
 * **Bi-Directional Currency Sync:** Flip the currency dropdown on any sheet (monthly or annual), and the script instantly broadcasts the state change across the entire network.
+<img width="481" height="413" alt="Currency-Sync" src="https://github.com/user-attachments/assets/94f4cfcd-8f4f-4605-b50e-457b20a6c3c8" />
+
 * **Dynamic Formatting Engine:** Automatically re-formats accounting tables between Indonesian Rupiah (`Rp#,##0.00`) and Canadian Dollars (`$#,##0.00`) based on the active selection.
 * **Decoupled Architecture:** Zero hardcoded spreadsheet IDs. The system reads connections dynamically from a launchpad on the `FRONT COVER` tab, making year-over-year rollouts or duplication easy.
 * **Programmatic Trigger Setup:** Includes a custom `System Admin` menu to provision background installable triggers automatically, removing the need to configure them manually in the Google Cloud console.
