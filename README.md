@@ -54,6 +54,6 @@ To ensure the ecosystem doesn't drop network requests, adhere to the following g
 
 ---
 
-## 📜 License
+## License
 
 **Personal / Proprietary License** This codebase and architectural design are built exclusively for private financial tracking and proprietary accounting usage. All rights reserved.
