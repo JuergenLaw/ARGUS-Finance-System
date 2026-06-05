@@ -1,61 +1,55 @@
-# Dynamic Multi-Spreadsheet Financial Ledger System
+# Personal Financial Ledger Automation
 
-An automated, interconnected accounting and financial ledger network built using **Google Sheets** and **Google Apps Script**. This ecosystem connects 12 individual Monthly Spreadsheets to a central Annual Master Spreadsheet, featuring real-time, bi-directional synchronization, dynamic currency formatting, and automated background triggers.
-
----
-
-## Key Features
-
-* **Bi-Directional Currency Sync:** Changing the global currency dropdown in *any* sheet (Monthly or Annual) automatically signals and updates the entire network.
-* **Intelligent Formatting Engine:** Dynamically transforms accounting ranges between Indonesian Rupiah (`Rp#,##0.00`) and Canadian Dollars (`$#,##0.00`) depending on the active state.
-* **Zero Hardcoded IDs:** Fully decoupled architecture. All spreadsheet connections are read dynamically from a `FRONT COVER` launchpad, allowing effortless system duplication or year-over-year rollover.
-* **One-Click System Initialization:** Custom `⚙️ System Admin` native UI menu allows users to programmatically install complex background `onEdit` triggers without touching code.
+An interconnected accounting network that links 12 individual monthly sheets to a central annual master dashboard using Google Apps Script. The system handles bi-directional currency switching, automated ledger formatting, and multi-workbook synchronization entirely in the background.
 
 ---
 
-## System Architecture & File Layout
+## Features
 
-The system relies on exact tab structural naming to safely execute formatting passes without throwing errors.
-
-### Monthly Spreadsheet Tabs
-* `FRONT COVER` — Holds configuration metadata and system links.
-* `JOURNAL ENTRIES` & `GENERAL LEDGER` — Raw transactional input data.
-* `TRIAL BALANCE` & `FINANCIAL STATEMENTS` — Core financial reporting sheets.
-* `CLOSING ENTRIES` & `TRIAL BALANCE AFTER CLOSING` — Period-end processing.
-
-### Annual Master Spreadsheet Tabs
-* `FRONT COVER` — The Master Launchpad containing the Spreadsheet IDs for rows `B34:B45` (January–December).
-* `ACCOUNTS SUMMARY` & `EXECUTIVE SUMMARY` — High-level multi-month aggregations.
+* **Bi-Directional Currency Sync:** Flip the currency dropdown on any sheet (monthly or annual), and the script instantly broadcasts the state change across the entire network.
+* **Dynamic Formatting Engine:** Automatically re-formats accounting tables between Indonesian Rupiah (`Rp#,##0.00`) and Canadian Dollars (`$#,##0.00`) based on the active selection.
+* **Decoupled Architecture:** Zero hardcoded spreadsheet IDs. The system reads connections dynamically from a launchpad on the `FRONT COVER` tab, making year-over-year rollouts or duplication easy.
+* **Programmatic Trigger Setup:** Includes a custom `System Admin` menu to provision background installable triggers automatically, removing the need to configure them manually in the Google Cloud console.
 
 ---
 
-## Setup & Installation Instructions
+## Project Structure
 
-To deploy this system across your workbook network:
+The underlying scripts rely on explicit tab names to process formatting changes safely without throwing null errors.
 
-1. **Populate the Launchpad:** In the Annual Master Spreadsheet, navigate to the `FRONT COVER` and input the respective Google Spreadsheet IDs for each month in column B (rows 34–45).
-2. **Open Apps Script:** Paste the monthly codebase into your Monthly template and the annual codebase into your Annual Master sheet.
-3. **Initialize Background Triggers:**
-   * Refresh your spreadsheet browser tab.
-   * Wait 3–5 seconds for the custom native menu to load.
-   * Click **`⚙️ System Admin`** ➡️ **`🚀 Initialize Triggers`**.
-   * Grant the standard Google security permissions on the initial run.
-4. **Success:** Once the toast notification appears in the bottom right corner, your background engine is officially active.
+### Monthly Sheets
+* `FRONT COVER` — Contains system configurations and network links.
+* `JOURNAL ENTRIES` & `GENERAL LEDGER` — Transactional input ledgers.
+* `TRIAL BALANCE` & `FINANCIAL STATEMENTS` — Core financial reporting.
+* `CLOSING ENTRIES` & `TRIAL BALANCE AFTER CLOSING` — Month-end close tabs.
 
----
-
-## Limitations & Governance Rules
-
-To ensure the ecosystem doesn't drop network requests, adhere to the following governance rules:
-
-* **Tab Renaming Prohibited:** The underlying script relies on exact string matches (e.g., `"JOURNAL ENTRIES"`). Renaming any core tracking sheet will cause the formatting engine to safely bypass that tab to prevent workbook corruption.
-* **File Duplication Trigger Loss:** Google Sheets intentionally strips background installable triggers during a file copy operation for account security. When generating a new month from your template, **you must re-run step 3 (Initialize Triggers)** in the new file.
-* **Cell Merge Preservation:** The year formatting function reads directly from cell `B31` on the `FRONT COVER`. While `B31` is merged with `C31`, data integrity must remain anchored in the top-left cell (`B31`).
+### Annual Master
+* `FRONT COVER` — The master configuration hub holding the spreadsheet IDs for Jan–Dec (rows `B34:B45`).
+* `ACCOUNTS SUMMARY` & `EXECUTIVE SUMMARY` — Multi-month data aggregations.
 
 ---
 
-## 🔗 Live Interactive Demos
+## How to Set It Up
 
-Explore the fully functional, read-only template architecture here:
-* [Live Monthly Ledger Template ↗](PASTE_YOUR_SANITIZED_MONTHLY_LINK_HERE)
-* [Live Annual Master Dashboard ↗](PASTE_YOUR_SANITIZED_ANNUAL_LINK_HERE)
+1. **Link the Network:** Open your Annual Master sheet, go to the `FRONT COVER`, and paste your monthly Google Spreadsheet IDs into column B (rows 34–45).
+2. **Apply the Script:** Paste the monthly codebase into your monthly sheets and the annual codebase into your master sheet.
+3. **Initialize Triggers:** * Refresh your spreadsheet browser tab and wait a few seconds for the UI to register.
+   * Click the custom menu: **System Admin** ➡️ **Initialize Monthly Triggers**.
+   * Authorize the standard Google security permissions on the initial run.
+4. **Test the Sync:** Once the success toast notification appears, the automation is live. Change a currency dropdown on any statement tab to see the network update.
+
+---
+
+## Design Constraints & Rules
+
+* **Tab Names are Strict:** The formatting loops search for exact tab strings (like `"JOURNAL ENTRIES"`). If you rename a tab, the script will safely bypass it to avoid breaking the workbook.
+* **Copying Files Drops Triggers:** Google Sheets strips out installable background triggers when you duplicate a file. When creating a new month from your template, remember to re-run step 3 (**System Admin ➡️ Initialize Monthly Triggers**).
+* **Top-Left Anchor Validation:** The sheet reads year parameters from the merged `B31:C31` cell on the `FRONT COVER`. Ensure your data values remain anchored in the top-left cell (`B31`) to protect data integrity.
+
+---
+
+## Templates
+
+If you want to look at the layout or test the scripts, feel free to check out these viewing samples and copy them:
+* [Monthly Ledger Template ↗](PASTE_YOUR_SANITIZED_MONTHLY_LINK_HERE)
+* [Annual Master Dashboard ↗](PASTE_YOUR_SANITIZED_ANNUAL_LINK_HERE)
