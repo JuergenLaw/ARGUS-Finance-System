@@ -54,6 +54,8 @@ To ensure the ecosystem doesn't drop network requests, adhere to the following g
 
 ---
 
-## License
+## 🔗 Live Interactive Demos
 
-**Personal / Proprietary License** This codebase and architectural design are built exclusively for private financial tracking and proprietary accounting usage. All rights reserved.
+Explore the fully functional, read-only template architecture here:
+* [Live Monthly Ledger Template ↗](PASTE_YOUR_SANITIZED_MONTHLY_LINK_HERE)
+* [Live Annual Master Dashboard ↗](PASTE_YOUR_SANITIZED_ANNUAL_LINK_HERE)
