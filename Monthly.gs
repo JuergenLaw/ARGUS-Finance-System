@@ -1,27 +1,23 @@
-// =========================
-// 🛠️ AUTOMATED INITIALIZATION MENU
-// =========================
-
 /**
- * Runs automatically every time the spreadsheet is opened.
- * This function handles copying over to new monthly sheets perfectly.
+ * System Admin Menu
+ * Creates a custom administrative menu when the spreadsheet opens.
  */
 function onOpen() {
   const ui = SpreadsheetApp.getUi();
-  ui.createMenu('⚙️ System Admin')
-    .addItem('🚀 Initialize Monthly Triggers', 'setupAutomatedTriggers')
+  ui.createMenu('System Admin')
+    .addItem('Initialize Monthly Triggers', 'setupAutomatedTriggers')
     .addToUi();
 }
 
 /**
- * Programmatically builds the required installable trigger for this specific sheet copy.
- * Eliminates the need to ever open the clock icon menu manually.
+ * Trigger Initialization
+ * Programmatically provisions installable onEdit triggers for the active sheet.
  */
 function setupAutomatedTriggers() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const targetFunctionName = 'runFinancialSystem';
   
-  // 1. Scan existing triggers to prevent creating accidental duplicates
+  // Check for existing triggers to prevent duplicates
   const existingTriggers = ScriptApp.getProjectTriggers();
   let triggerExists = false;
   
@@ -33,34 +29,39 @@ function setupAutomatedTriggers() {
   }
   
   if (triggerExists) {
-    ss.toast("System architecture is already optimized. Triggers are already active!", "System Notice", 5);
+    ss.toast("Triggers are already active for this workbook.", "System Notice", 5);
     return;
   }
   
-  // 2. Programmatically create the installable On Edit trigger for this file
+  // Create the installable onEdit trigger
   try {
     ScriptApp.newTrigger(targetFunctionName)
              .forSpreadsheet(ss)
              .onEdit()
              .create();
              
-    ss.toast("Installable triggers successfully mapped to this workbook. You are good to go!", "Setup Complete 🎉", 5);
+    ss.toast("Installable triggers successfully mapped to this workbook.", "Setup Complete", 5);
   } catch (err) {
     SpreadsheetApp.getUi().alert("Setup failed: " + err.toString());
   }
 }
 
+/**
+ * Master Trigger Orchestrator
+ * Coordinates execution sequence for all underlying financial automation routines.
+ */
 function runFinancialSystem(e) {
-  handleJournalSubsidiary(e);   // Script 1
-  handleCurrencyFormatter(e);   // Script 2
-  handleDropdownSync(e);        // Script 3
-  handleJournalCurrency(e);     // Script 4
-  handleGlobalDropdownSync(e);  // 🌍 Global sync
+  handleJournalSubsidiary(e);   // Processes conditional data validation rules
+  handleCurrencyFormatter(e);   // Manages local sheet number formats
+  handleDropdownSync(e);        // Synchronizes local sheet dropdowns
+  handleJournalCurrency(e);     // Evaluates dynamic row-by-row journal formats
+  handleGlobalDropdownSync(e);  // Distributes state updates across workbook network
 }
 
-// =========================
-// 🟡 SCRIPT 1: Subsidiary
-// =========================
+/**
+ * Script 1: Journal Subsidiary Validation
+ * Dynamically updates sub-account validation dropdowns based on account type.
+ */
 function handleJournalSubsidiary(e) {
   const sheet = e.source.getActiveSheet();
   const editedCell = e.range;
@@ -121,9 +122,10 @@ function handleJournalSubsidiary(e) {
   target.setValue("Not Recognizable");
 }
 
-// =========================
-// 🔵 SCRIPT 2: Formatter
-// =========================
+/**
+ * Script 2: Local Currency Formatter
+ * Instantly formats active accounting sheets when the local toggle is changed.
+ */
 function handleCurrencyFormatter(e) {
   const sheet = e.source.getActiveSheet();
   const cell = e.range;
@@ -150,31 +152,25 @@ function handleCurrencyFormatter(e) {
   ranges.forEach(r => sheet.getRange(r).setNumberFormat(format));
 }
 
-// =========================
-// 🟣 APPLY FORMAT (GLOBAL - UNIVERSAL VERSION)
-// =========================
+/**
+ * Core Layout Formatting Engine
+ * Formats designated data columns across all active accounting tabs.
+ */
 function applyCurrencyFormat(ss, newValue) {
   const format = (newValue === "Total in IDR") ? "Rp#,##0.00" : "$#,##0.00";
 
-  // 🎯 Combined blueprint for BOTH Monthly and Annual tab layouts
   const config = {
-    // Shared Tabs (Exist in both)
     "INITIAL BALANCE SHEET": ["C5:D14"],
     "TRIAL BALANCE": ["C5:D36"],
     "FINANCIAL STATEMENTS": ["D5:E29", "H5:H7", "M5:M14", "R5:R14"],
     "CLOSING ENTRIES": ["E5:F34"],
-    
-    // Monthly-Only Tabs
     "JOURNAL ENTRIES": ["K5:L"],
     "GENERAL LEDGER": ["E:H", "N:Q", "W:Z"],
     "TRIAL BALANCE AFTER CLOSING": ["C5:D14"],
-    
-    // Annual-Only Tabs
     "ACCOUNTS SUMMARY": ["D6:D", "H6:H", "L6:L", "P6:P"],
     "EXECUTIVE SUMMARY": ["B5:E18"]
   };
 
-  // Safe execution loop: formats tabs only if they actually exist in the workbook
   for (let s in config) {
     const sh = ss.getSheetByName(s);
     if (!sh) continue; 
@@ -185,9 +181,10 @@ function applyCurrencyFormat(ss, newValue) {
   }
 }
 
-// =========================
-// 🟢 SCRIPT 3: LOCAL SYNC
-// =========================
+/**
+ * Script 3: Local Dropdown Synchronization
+ * Mirror-syncs all localized currency dropdowns within the active workbook.
+ */
 function handleDropdownSync(e) {
   const editedCell = e.range;
   const sheetName = editedCell.getSheet().getName();
@@ -219,9 +216,10 @@ function handleDropdownSync(e) {
   }
 }
 
-// =========================
-// 🟠 SCRIPT 4: Journal Currency
-// =========================
+/**
+ * Script 4: Journal Entry Currency Rule
+ * Evaluates split-currency entries row-by-row on transaction ledger journals.
+ */
 function handleJournalCurrency(e) {
   const sheet = e.source.getActiveSheet();
   const cell = e.range;
@@ -263,9 +261,10 @@ function handleJournalCurrency(e) {
   }
 }
 
-// =========================
-// 🌍 GLOBAL SYNC (BI-DIRECTIONAL DISTRIBUTED NETWORK)
-// =========================
+/**
+ * Network Sync: Distributed Global State Update
+ * Distributes structural currency changes across Annual and Monthly files.
+ */
 function handleGlobalDropdownSync(e) {
   const sheet = e.range.getSheet();
   const cell = e.range;
@@ -280,18 +279,15 @@ function handleGlobalDropdownSync(e) {
     "TRIAL BALANCE AFTER CLOSING": "F4"
   };
 
-  // ❗ Only run when editing a dropdown cell
   if (triggers[sheet.getName()] !== cell.getA1Notation()) return;
 
   const newValue = cell.getValue();
   const ssLocal = e.source;
-  const currentId = ssLocal.getId(); // Tracks this sheet's ID to prevent updating itself
+  const currentId = ssLocal.getId();
 
-  // Fetch Annual ID from local FRONT COVER dashboard
   const frontCover = ssLocal.getSheetByName("FRONT COVER");
   if (!frontCover) return; 
 
-  // New location for Annual ID is cell B32
   const annualId = frontCover.getRange("B32").getValue().toString().trim();
   if (!annualId || annualId === "" || annualId.toLowerCase() === "id_annual") {
     ssLocal.toast("Global sync skipped: Annual ID missing in FRONT COVER!B32.", "Notice");
@@ -317,10 +313,9 @@ function handleGlobalDropdownSync(e) {
   };
 
   try {
-    // Open the Annual Master ledger
     const ssAnnual = SpreadsheetApp.openById(annualId);
 
-    // 1️⃣ STEP ONE: Update the Annual Master Summary sheets
+    // Update Master Annual Summary sheets
     for (let sheetName in annualMap) {
       const targetSheet = ssAnnual.getSheetByName(sheetName);
       if (!targetSheet) continue;
@@ -332,14 +327,13 @@ function handleGlobalDropdownSync(e) {
     }
     applyCurrencyFormat(ssAnnual, newValue);
 
-    // 2️⃣ STEP TWO: Read Sibling Monthly IDs from Annual's FRONT COVER table (B34:B45)
+    // Process Sibling Monthly Workbooks from Launchpad Matrix
     const annualFrontCover = ssAnnual.getSheetByName("FRONT COVER");
     if (annualFrontCover) {
       const spreadsheetIds = annualFrontCover.getRange("B34:B45").getValues()
                                         .map(row => row[0].toString().trim())
                                         .filter(id => id !== "" && id !== currentId && !id.toLowerCase().includes("id_"));
 
-      // Push updates out to all sibling files found in the grid
       spreadsheetIds.forEach(id => {
         try {
           const ssTarget = SpreadsheetApp.openById(id);
@@ -361,7 +355,7 @@ function handleGlobalDropdownSync(e) {
       });
     }
 
-    ssLocal.toast("Successfully synchronized currency states across the entire annual network!", "Network Sync Complete 🎉");
+    ssLocal.toast("Successfully synchronized currency states across the entire annual network!", "Network Sync Complete");
 
   } catch (err) {
     Logger.log("Error during distribution sync: " + err);
