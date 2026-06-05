@@ -1,10 +1,10 @@
-# 📊 Dynamic Multi-Spreadsheet Financial Ledger System
+# Dynamic Multi-Spreadsheet Financial Ledger System
 
 An automated, interconnected accounting and financial ledger network built using **Google Sheets** and **Google Apps Script**. This ecosystem connects 12 individual Monthly Spreadsheets to a central Annual Master Spreadsheet, featuring real-time, bi-directional synchronization, dynamic currency formatting, and automated background triggers.
 
 ---
 
-## 🚀 Key Features
+## Key Features
 
 * **Bi-Directional Currency Sync:** Changing the global currency dropdown in *any* sheet (Monthly or Annual) automatically signals and updates the entire network.
 * **Intelligent Formatting Engine:** Dynamically transforms accounting ranges between Indonesian Rupiah (`Rp#,##0.00`) and Canadian Dollars (`$#,##0.00`) depending on the active state.
@@ -13,23 +13,23 @@ An automated, interconnected accounting and financial ledger network built using
 
 ---
 
-## 🛠️ System Architecture & File Layout
+## System Architecture & File Layout
 
 The system relies on exact tab structural naming to safely execute formatting passes without throwing errors.
 
-### 📅 Monthly Spreadsheet Tabs
+### Monthly Spreadsheet Tabs
 * `FRONT COVER` — Holds configuration metadata and system links.
 * `JOURNAL ENTRIES` & `GENERAL LEDGER` — Raw transactional input data.
 * `TRIAL BALANCE` & `FINANCIAL STATEMENTS` — Core financial reporting sheets.
 * `CLOSING ENTRIES` & `TRIAL BALANCE AFTER CLOSING` — Period-end processing.
 
-### 🏆 Annual Master Spreadsheet Tabs
+### Annual Master Spreadsheet Tabs
 * `FRONT COVER` — The Master Launchpad containing the Spreadsheet IDs for rows `B34:B45` (January–December).
 * `ACCOUNTS SUMMARY` & `EXECUTIVE SUMMARY` — High-level multi-month aggregations.
 
 ---
 
-## 📥 Setup & Installation Instructions
+## Setup & Installation Instructions
 
 To deploy this system across your workbook network:
 
@@ -44,7 +44,7 @@ To deploy this system across your workbook network:
 
 ---
 
-## ⚠️ Limitations & Governance Rules
+## Limitations & Governance Rules
 
 To ensure the ecosystem doesn't drop network requests, adhere to the following governance rules:
 
