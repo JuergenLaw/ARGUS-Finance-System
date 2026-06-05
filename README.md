@@ -1,4 +1,4 @@
-# Personal Financial Ledger Automation
+# Automated Personal Financial Reporting System
 
 An interconnected accounting network that links 12 individual monthly sheets to a central annual master dashboard using Google Apps Script. The system handles bi-directional currency switching, automated ledger formatting, and multi-workbook synchronization entirely in the background.
 
