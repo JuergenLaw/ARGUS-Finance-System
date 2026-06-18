@@ -75,12 +75,12 @@ function handleJournalSubsidiary(e) {
 
   const validationMap = {
     "Cash on hand": ["CAD on Hand", "IDR on Hand"],
-    "Cash in bank": ["Bank-CAD", "BCA J. (S)-IDR", "BCA J. (F)-IDR", "BCA J. (E)-IDR"],
-    "Electronic wallets": ["E Wallet-CAD", "GoPay-IDR", "OVO-IDR"],
-    "Accounts receivable": ["A/R (PAR)-CAD", "A/R (Vhier)-IDR", "A/R (Edy/Yenni)-IDR"],
-    "Interest receivable": ["I/R (PIR)-CAD", "I/R (Vhier-IDR)"],
+    "Cash in bank": ["Scotia-CAD", "BCA J. (S)-IDR", "BCA J. (F)-IDR", "BCA J. (E)-IDR"],
+    "Electronic wallets": ["PayPal-CAD", "GoPay-IDR", "OVO-IDR"],
+    "Accounts receivable": ["A/R (X)-CAD", "A/R (Y)-IDR", "A/R (Z)-IDR"],
+    "Interest receivable": ["I/R (X)-CAD", "I/R (Y-IDR)"],
     "Commodities": ["Gold (ANTM)-IDR"],
-    "Accounts payable": ["A/P (PAP)-CAD", "A/P (Vhier)-IDR", "A/P (Edy/Yenni)-IDR"]
+    "Accounts payable": ["A/P (X)-CAD", "A/P (Y)-IDR", "A/P (Z)-IDR"]
   };
 
   const target = sheet.getRange(row, 6);
