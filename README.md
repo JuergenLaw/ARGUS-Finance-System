@@ -1,10 +1,21 @@
 # ARGUS: Accounting Report & GUidance System
 
-An interconnected accounting network that links 12 individual monthly sheets to a central annual master dashboard using Google Apps Script. The system handles bi-directional currency switching, automated ledger formatting, and multi-workbook synchronization entirely in the background.
+An automated double-entry accounting system built entirely within Google Sheets and Google Apps Script. ARGUS automates a simplified version of the accounting cycle, from daily journal entries to ledger posting, trial balancing, and financial statements.
+
+This system is divided into 2 separate sub-systems: *Monthly Financial Reports (MFRs)* for recording transactions, and *Annual Financial Summaries (AFSs)* for combining individual MFRs into a centralized yearly evaluation.
 
 ---
 
-## Features
+## Single-Currency Setup Features
+
+* **Automated Bookkeeping Cycle**: Records transactions through `JOURNAL ENTRIES` and have them automatically configured from `GENERAL LEDGER` and `SUBSIDIARY LEDGER` all the way to `TRIAL BALANCE AFTER CLOSING`, ensuring every transaction remains balanced and traceable.
+* **Simple Error-Handling**: Built-in safeguards (specifically in `JOURNAL ENTRIES`) that stop you from inputting incorrect or unrecognized accounts and subsidiaries, making sure the rest of the automation works well.
+* **Automatic Carry-Forward Pipeline**: Allows the importing of the previous month's closing balances via simple URL linkages so it moves continuously without manual data-entry errors.
+* **AFS Integration**: Combines data from 12 monthly MFRs into a centralized annual summary system so financial data can be analysed through automated summaries, trend visualizations, and comparative tables.
+
+---
+
+## Multi-Currency Setup Features (Active WIP Branch)
 
 * **Bi-Directional Currency Sync:** Flip the currency dropdown on any sheet (monthly or annual), and the script instantly broadcasts the state change across the entire network.
 <img width="481" height="413" alt="Currency-Sync" src="https://github.com/user-attachments/assets/94f4cfcd-8f4f-4605-b50e-457b20a6c3c8" />
@@ -15,45 +26,59 @@ An interconnected accounting network that links 12 individual monthly sheets to 
 
 ---
 
-## Project Structure
+## Spreadsheet Structure
 
-The underlying scripts rely on explicit tab names to process formatting changes safely without throwing null errors.
+### Monthly Financial Reports (MFRs)
+* `FRONT COVER`: Contains system configurations and network links.
+* `CHART OF ACCOUNTS`: Details the accounts and subsidiaries used across the system.
+* `INITIAL BALANCE SHEET`: Pulls data from last month's spreadsheet.
+* `JOURNAL ENTRIES`: Records financial transactions, *the only tab a user needs to edit*.
+* `GENERAL LEDGER` & `SUBSIDIARY LEDGER`: Categorisation of accounts and subsidiaries used in the `JOURNAL ENTRIES`.
+* `TRIAL BALANCE`: Balances the debit and credit, *if both are balanced, then no errors are made by the system so far*.
+* `FINANCIAL STATEMENTS`: Checks net profit/loss and makes a new capital balance.
+* `CLOSING ENTRIES`: Closes expenses, liabilities, and prive.
+* `TRIAL BALANCE AFTER CLOSING`: Balances the debit and credit after closing, *if both are balanced, then no errors are made by the system so far*.
 
-### Monthly Sheets
-* `FRONT COVER` — Contains system configurations and network links.
-* `JOURNAL ENTRIES` & `GENERAL LEDGER` — Transactional input ledgers.
-* `TRIAL BALANCE` & `FINANCIAL STATEMENTS` — Core financial reporting.
-* `CLOSING ENTRIES` & `TRIAL BALANCE AFTER CLOSING` — Month-end close tabs.
+### Annual Financial Summaries (AFSs)
+* `FRONT COVER`: Contains system configurations and network links.
+* `CHART OF ACCOUNTS`: Details the accounts and subsidiaries used across the system.
+* `INITIAL BALANCE SHEET`: Pulls data from January's spreadsheet.
+* `ACCOUNTS SUMMARY` & `SUBSIDIARY SUMMARY`: Multi-month data summaries.
+* `TRIAL BALANCE`: Balances the debit and credit, *if both are balanced, then no errors are made by the system so far*.
+* `FINANCIAL STATEMENTS`: Checks net profit/loss and makes a new capital balance.
+* `EXECUTIVE SUMMARY`: Evaluates all financial happenings throughout the year.
 
-### Annual Master
-* `FRONT COVER` — The master configuration hub holding the spreadsheet IDs for Jan–Dec (rows `B34:B45`).
-* `ACCOUNTS SUMMARY` & `EXECUTIVE SUMMARY` — Multi-month data aggregations.
+---
+
+## Custom Builds Service
+
+While ARGUS is 100% free and open-source for anyone who wants to download, study, or manually customize it, I understand that businesses and busy individuals often need tailored systems.
+
+If you want a custom-tailored financial tracking setup without getting your hands dirty in Google Apps Script, you can hire me to build it for you.
+
+I offer custom services including:
+* Designing custom `CHART OF ACCOUNTS` tailored to your business or personal assets.
+* Re-wiring the scripts to support custom local currencies and local tax codes.
+* Integrating custom financial reporting dashboards, visual KPI tracking, and analytical charts.
+
+To discuss a custom setup, feel free to open a discussion here on GitHub or reach out to me directly via:
+* E-mail: juergenllaturisa@gmail.com
+* LinkedIn: Juergen Law
 
 ---
 
 ## How to Set It Up
 
-1. **Link the Network:** Open your Annual Master sheet, go to the `FRONT COVER`, and paste your monthly Google Spreadsheet IDs into column B (rows 34–45).
-2. **Apply the Script:** Paste the monthly codebase into your monthly sheets and the annual codebase into your master sheet.
-3. **Initialize Triggers:** * Refresh your spreadsheet browser tab and wait a few seconds for the UI to register.
-   * Click the custom menu: **System Admin** ➡️ **Initialize Monthly Triggers**.
-   * Authorize the standard Google security permissions on the initial run.
-4. **Test the Sync:** Once the success toast notification appears, the automation is live. Change a currency dropdown on any statement tab to see the network update.
-
----
-
-## Design Constraints & Rules
-
-* **Tab Names are Strict:** The formatting loops search for exact tab strings (like `"JOURNAL ENTRIES"`). If you rename a tab, the script will safely bypass it to avoid breaking the workbook.
-* **Copying Files Drops Triggers:** Google Sheets strips out installable background triggers when you duplicate a file. When creating a new month from your template, remember to re-run step 3 (**System Admin ➡️ Initialize Monthly Triggers**).
-* **Top-Left Anchor Validation:** The sheet reads year parameters from the merged `B31:C31` cell on the `FRONT COVER`. Ensure your data values remain anchored in the top-left cell (`B31`) to protect data integrity.
+[ARGUS Guide Series ↗]
 
 ---
 
 ## Templates
 
-If you want to look at the layout or test the scripts, feel free to check out these viewing samples and copy them:
+[Monthly Financial Report Template-SingleCurrency ↗]
+[Annual Financial Summary Template-SingleCurrency ↗]
 
-[Financial Report Template ↗](https://drive.google.com/drive/folders/1rrypquIKyJnfLiTLfyiRsz2lSqqh1W04?usp=drive_link)
+[Monthly Financial Report Template-MultiCurrency (WIP) ↗]
+[Annual Financial Summary Template-MultiCurrency (WIP) ↗]
 
-Heads up: Full cross-workbook synchronization requires the complete 12-month network setup and authenticated triggers. If you want to see the ecosystem truly in action via a live demo, feel free to reach out!
+*If you encounter any bugs or errors, please contact me so I can fix it for you!*
