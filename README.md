@@ -69,16 +69,16 @@ To discuss a custom setup, feel free to open a discussion here on GitHub or reac
 
 ## How to Set It Up
 
-[ARGUS Guide Series ↗]
+[ARGUS Guide Series ↗](https://www.youtube.com/playlist?list=PLQUXJZ2hz1xhuX7t6MzdJn9GAsZx3u6Kl)
 
 ---
 
 ## Templates
 
-[Monthly Financial Report Template-SingleCurrency ↗]
-[Annual Financial Summary Template-SingleCurrency ↗]
+[Monthly Financial Report Template-SingleCurrency ↗](https://docs.google.com/spreadsheets/d/1SwD_aFfoJ6qsEkz9XDZ5LIsvc1NXjHIFdcSId8nLJmQ/edit?usp=drive_link)
+[Annual Financial Summary Template-SingleCurrency ↗](https://docs.google.com/spreadsheets/d/1ypp822Iy87pcuaPD9esQhif0gabr-n66zW6nPuaXNRM/edit?usp=drive_link)
 
-[Monthly Financial Report Template-MultiCurrency (WIP) ↗]
-[Annual Financial Summary Template-MultiCurrency (WIP) ↗]
+[Monthly Financial Report Template-MultiCurrency (WIP) ↗](https://docs.google.com/spreadsheets/d/1YoayGoEwjrGhdhH2C1jSamjoZ29Hh16swES4GgMwNZ8/edit?usp=drive_link)
+[Annual Financial Summary Template-MultiCurrency (WIP) ↗](https://docs.google.com/spreadsheets/d/1y017RWIhtjE76JbYx4mC7gxZADdPvzgDt5v5S1Pc5Ag/edit?usp=drive_link)
 
 *If you encounter any bugs or errors, please contact me so I can fix it for you!*
